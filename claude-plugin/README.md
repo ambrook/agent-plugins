@@ -7,7 +7,6 @@ A Claude plugin that connects to the read-only [Ambrook MCP endpoint](https://ap
 | Path                          | Purpose                                                              |
 | ----------------------------- | -------------------------------------------------------------------- |
 | `.claude-plugin/plugin.json`  | Plugin manifest                                                      |
-| `.claude-plugin/icon.png`     | Listing icon (512 × 512 PNG)                                         |
 | `.mcp.json`                   | Remote HTTP MCP server at `https://api.ambrook.com/mcp`              |
 | `skills/use-ambrook/SKILL.md` | How to pick the business and dates, pull reports, and stay read-only |
 
@@ -31,11 +30,3 @@ The server uses OAuth with dynamic client registration and the `external_mcp:rea
 - Show my 10 most recent transactions missing a category and any suggested categories.
 
 Requests to change data (pay a bill, recategorize transactions, delete invoices) should be declined without calling tools; the connection is read-only.
-
-## Developing (Ambrook monorepo)
-
-The source lives in `mcp/agent-plugins/` in `ambrook/ambrook.com`, and the `Sync agent-plugins` workflow publishes it to [`ambrook/agent-plugins`](https://github.com/ambrook/agent-plugins) on every change to `main`.
-
-- `skills` is a symlink to `../chatgpt-plugin/skills`, so the Claude and ChatGPT plugins ship the same skill. The sync copies the files, not the link.
-- Bump `version` in `.claude-plugin/plugin.json` when you change the plugin, so installed copies pick up the update.
-- From the monorepo root, validate with `claude plugin validate mcp/agent-plugins` and try it with `claude --plugin-dir mcp/agent-plugins/claude-plugin`.

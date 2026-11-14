@@ -2,8 +2,8 @@
 
 Plugins that connect AI assistants to the read-only [Ambrook MCP endpoint](https://api.ambrook.com/mcp).
 
-> [!IMPORTANT]
-> This repository is generated. Its source is `mcp/agent-plugins/` in the Ambrook monorepo (`ambrook/ambrook.com`), and the `Sync agent-plugins` workflow there overwrites this repository on every change to `main`. Make changes in the monorepo; edits made here are lost on the next sync.
+> [!NOTE]
+> Ambrook publishes this repository automatically, and changes made here directly are overwritten. To report a problem or request a change, contact [Ambrook support](https://support.ambrook.com/en/).
 
 ## Claude
 
@@ -15,6 +15,10 @@ The repository root is a Claude Code marketplace. In Claude Code:
 ```
 
 See [claude-plugin/README.md](claude-plugin/README.md) for what the plugin contains and how to sign in.
+
+## ChatGPT
+
+[chatgpt-plugin](chatgpt-plugin/) contains the Ambrook plugin package for ChatGPT.
 
 ## License
 
