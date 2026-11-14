@@ -7,6 +7,7 @@ A Claude plugin that connects to the read-only [Ambrook MCP endpoint](https://ap
 | Path                          | Purpose                                                              |
 | ----------------------------- | -------------------------------------------------------------------- |
 | `.claude-plugin/plugin.json`  | Plugin manifest                                                      |
+| `.claude-plugin/icon.png`     | Listing icon (512 × 512 PNG)                                         |
 | `.mcp.json`                   | Remote HTTP MCP server at `https://api.ambrook.com/mcp`              |
 | `skills/use-ambrook/SKILL.md` | How to pick the business and dates, pull reports, and stay read-only |
 
