@@ -1,4 +1,4 @@
-<a href="https://ambrook.com/mcp-server"><img src="assets/ambrook-ai-banner.webp" alt="Your books, inside your AI. Use Ambrook in ChatGPT, Claude, Grok, and more." width="100%"></a>
+<a href="https://ambrook.com/get-started?utm_source=github&utm_medium=readme&utm_campaign=agent_plugins&utm_content=hero_banner"><img src="assets/ambrook-ai-banner.webp" alt="Your books, inside your AI. Use Ambrook in ChatGPT, Claude, Grok, and more." width="100%"></a>
 
 # Ambrook for AI assistants
 
