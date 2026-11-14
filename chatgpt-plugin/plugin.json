@@ -1,0 +1,101 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ambrook",
+  "version": "0.1.0",
+  "description": "Read Ambrook records and financial reports from your AI assistant.",
+  "author": {
+    "name": "Ambrook",
+    "url": "https://ambrook.com"
+  },
+  "homepage": "https://ambrook.com/overview/ai",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Ambrook",
+        "shortDescription": "Read your Ambrook books",
+        "longDescription": "Connect your Ambrook account to ask questions about your business books. Review transactions, unpaid invoices, upcoming bills, profit and loss, and balance sheets. Explore accounts, contacts, and bookkeeping tags, retrieve reports and attachments, and find Ambrook help articles. Follow links to view records in Ambrook. This connection provides read-only access to the organizations you can access in Ambrook. It cannot change records, send payments, or make purchases. An Ambrook account with MCP access is required.",
+        "developerName": "Ambrook",
+        "category": "Finance",
+        "defaultPrompt": [
+          "Compare my cash-basis profit and loss for the last two complete months.",
+          "Show my unpaid invoices and the total customers owe me.",
+          "Show my unpaid bills due in the next 30 days, including overdue bills."
+        ],
+        "websiteURL": "https://ambrook.com/overview/ai",
+        "supportURL": "https://support.ambrook.com/en/",
+        "privacyPolicyURL": "https://ambrook.com/privacy",
+        "termsOfServiceURL": "https://ambrook.com/terms",
+        "logo": "./assets/ambrook-icon.png",
+        "composerIcon": "./assets/ambrook-icon.png",
+        "logoDark": "./assets/ambrook-icon.png",
+        "composerIconDark": "./assets/ambrook-icon.png",
+        "brandColor": "#30392D",
+        "brandColorDark": "#C7D2C7"
+      },
+      "review": {
+        "prompts": [
+          "Which Ambrook businesses can I access, and which one is my default?",
+          "Compare my cash-basis profit and loss for the last two complete months and explain the three biggest changes.",
+          "How much do customers owe me? Show the 10 unpaid invoices due soonest, with customer, amount still owed, and due date.",
+          "Show unpaid bills due in the next 30 days, including overdue bills, and the total still owed. List the 10 due soonest.",
+          "Show my 10 most recent transactions missing a category and any suggested categories Ambrook has for them."
+        ],
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Identity and organization discovery. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
+              "prompt": "Which Ambrook businesses can I access, and which one is my default?",
+              "tools_triggered": "whoami",
+              "expected_behavior": "Call whoami with {}. List only returned organizations, show the returned defaultOrganizationId when present, and ask which organization to use if more than one is available. Do not invent an organization or fetch another organization before selection."
+            },
+            {
+              "description": "Two-month financial comparison using authoritative statement totals rather than transaction sums. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
+              "prompt": "Compare my cash-basis profit and loss for the last two complete months and explain the three biggest changes.",
+              "tools_triggered": "whoami, query_profit_and_loss",
+              "expected_behavior": "Resolve calendar months using the selected organization timezone and todaysDate from whoami. Call query_profit_and_loss with its orgId, basis=CASH, groupBy=Month, start at the first day of the earlier month and end at the final day of the later month. Use returned row/column relationships and cents values to calculate changes, format dollars correctly, and state dates and basis. Report only supported changes; explain missing data without inventing totals."
+            },
+            {
+              "description": "Accounts receivable with exact filtered totals and a bounded oldest-due page. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
+              "prompt": "How much do customers owe me? Show the 10 unpaid invoices due soonest, with customer, amount still owed, and due date.",
+              "tools_triggered": "whoami, list_invoices, get_app_links",
+              "expected_behavior": "After resolving orgId, call list_invoices with section=Unpaid, first=10 and sort={columnId:Due,direction:ASC}. Use totals.unpaidAmountCents across the full filtered set instead of summing the returned page. Display returned invoices only, format remaining amounts from cents and preserve organization-local due dates. Link returned record ids with get_app_links; do not construct ids. If there are no matches, explicitly report that."
+            },
+            {
+              "description": "Accounts payable calendar boundary including overdue bills, not only future dates. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
+              "prompt": "Show unpaid bills due in the next 30 days, including overdue bills, and the total still owed. List the 10 due soonest.",
+              "tools_triggered": "whoami, list_bills, get_app_links",
+              "expected_behavior": "Resolve orgId and today in the organization timezone. Call list_bills with section=Unpaid, dueBefore=today plus 30 calendar days, first=10, sort={columnId:Due,direction:ASC}, and no dueAfter bound so overdue bills remain included. Use totals.unpaidAmountCents for all matches, state the through-date and present vendor, amount still owed, and due date for returned bills. Convert cents accurately and link only returned ids using get_app_links. State no matches when applicable."
+            },
+            {
+              "description": "Missing-category filter followed by detail inspection for unapplied category suggestions. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
+              "prompt": "Show my 10 most recent transactions missing a category and any suggested categories Ambrook has for them.",
+              "tools_triggered": "whoami, list_transactions, get_transaction, get_app_links",
+              "expected_behavior": "Resolve orgId, then call list_transactions with first=10, fullyTagged={category:false}, and sort={columnId:Date,direction:DSC}. Read returned transactions and pagination, including transactionAmountCents. Call get_transaction for returned ids as needed to inspect pendingCategorySuggestion; use lineItemId to distinguish line suggestions. Present suggestions as unapplied. Use get_app_links for returned record ids. Do not claim categories were changed, infer complete tagging from appliedTags, or invent suggestions."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Unsupported payment action. Explain the connection is read-only and cannot pay bills or move money. Do not invoke MCP tools or claim a payment was sent.",
+              "prompt": "Pay a vendor $250 from my Ambrook Wallet now."
+            },
+            {
+              "description": "Unsupported bookkeeping update. Explain that this connection cannot change transaction categories. Do not invoke MCP tools or claim any recategorization occurred.",
+              "prompt": "Recategorize all my fuel transactions as repairs and save the changes."
+            },
+            {
+              "description": "Unsupported deletion. Explain that this connection cannot delete accounting records. Do not invoke MCP tools or claim records were removed.",
+              "prompt": "Delete all of my draft invoices from Ambrook."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin provides read-only access to an existing Ambrook account. It does not initiate purchases, subscriptions, or payments.",
+        "demo_recording_url": "https://supercut.ai/share/ambrook/lANghn2ahBs6EaLRFhGOkV"
+      },
+      "publication": {
+        "countries": ["US"],
+        "release_notes": "Initial plugin package for the existing Ambrook read-only MCP server, with account and organization discovery, bookkeeping records, financial reports, attachments, and help-center lookup. Includes a skill for month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup."
+      }
+    }
+  }
+}

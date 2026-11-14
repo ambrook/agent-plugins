@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "ambrook": {
+      "type": "streamable-http",
+      "url": "https://api.ambrook.com/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr"
+            },
+            "baseScopes": ["external_mcp:read"],
+            "defaultScopes": ["external_mcp:read"],
+            "resource": "https://api.ambrook.com/mcp"
+          }
+        }
+      }
+    }
+  }
+}

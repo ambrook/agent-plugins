@@ -7,5 +7,14 @@
     "url": "https://ambrook.com"
   },
   "homepage": "https://ambrook.com/overview/ai",
-  "keywords": ["ambrook", "accounting", "bookkeeping", "finance", "invoices", "bills"]
+  "license": "Apache-2.0",
+  "privacyPolicyUrl": "https://ambrook.com/privacy",
+  "keywords": [
+    "ambrook",
+    "accounting",
+    "bookkeeping",
+    "finance",
+    "invoices",
+    "bills"
+  ]
 }

@@ -12,9 +12,9 @@
       "name": "ambrook",
       "source": "./claude-plugin",
       "description": "Read Ambrook records and financial reports: transactions, unpaid invoices, bills due, profit and loss, balance sheets, contacts, tags, attachments, and help articles. Read-only.",
-      "version": "0.1.0",
       "category": "finance",
-      "homepage": "https://ambrook.com/overview/ai"
+      "homepage": "https://ambrook.com/overview/ai",
+      "license": "Apache-2.0"
     }
   ]
 }

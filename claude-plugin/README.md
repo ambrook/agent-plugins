@@ -2,15 +2,13 @@
 
 A Claude plugin that connects to the read-only [Ambrook MCP endpoint](https://api.ambrook.com/mcp) and adds the `use-ambrook` skill for month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup.
 
-It is ported from the ChatGPT plugin in the Ambrook monolith (`mcp/chatgpt-plugin`). Keep the skill in step with that package and with server changes that affect the workflows it describes.
-
 ## Contents
 
-| Path                           | Purpose                                                      |
-| ------------------------------ | ------------------------------------------------------------ |
-| `.claude-plugin/plugin.json`   | Plugin manifest                                              |
-| `.mcp.json`                    | Remote HTTP MCP server at `https://api.ambrook.com/mcp`      |
-| `skills/use-ambrook/SKILL.md`  | How to pick the business and dates, pull reports, and stay read-only |
+| Path                          | Purpose                                                              |
+| ----------------------------- | -------------------------------------------------------------------- |
+| `.claude-plugin/plugin.json`  | Plugin manifest                                                      |
+| `.mcp.json`                   | Remote HTTP MCP server at `https://api.ambrook.com/mcp`              |
+| `skills/use-ambrook/SKILL.md` | How to pick the business and dates, pull reports, and stay read-only |
 
 ## Authentication
 
@@ -18,22 +16,12 @@ The server uses OAuth with dynamic client registration and the `external_mcp:rea
 
 ## Install
 
-The repository root is a Claude Code marketplace (`.claude-plugin/marketplace.json`). In Claude Code:
-
 ```
 /plugin marketplace add ambrook/agent-plugins
 /plugin install ambrook@ambrook
 ```
 
-When you release a change, bump `version` in both `.claude-plugin/plugin.json` and the marketplace entry.
-
-## Try locally
-
-```bash
-claude --plugin-dir ./claude-plugin
-```
-
-Example prompts:
+## Example prompts
 
 - Which Ambrook businesses can I access, and which one is my default?
 - Compare my cash-basis profit and loss for the last two complete months.
@@ -42,3 +30,11 @@ Example prompts:
 - Show my 10 most recent transactions missing a category and any suggested categories.
 
 Requests to change data (pay a bill, recategorize transactions, delete invoices) should be declined without calling tools; the connection is read-only.
+
+## Developing (Ambrook monorepo)
+
+The source lives in `mcp/agent-plugins/` in `ambrook/ambrook.com`, and the `Sync agent-plugins` workflow publishes it to [`ambrook/agent-plugins`](https://github.com/ambrook/agent-plugins) on every change to `main`.
+
+- `skills` is a symlink to `../chatgpt-plugin/skills`, so the Claude and ChatGPT plugins ship the same skill. The sync copies the files, not the link.
+- Bump `version` in `.claude-plugin/plugin.json` when you change the plugin, so installed copies pick up the update.
+- From the monorepo root, validate with `claude plugin validate mcp/agent-plugins` and try it with `claude --plugin-dir mcp/agent-plugins/claude-plugin`.
