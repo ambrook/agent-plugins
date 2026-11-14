@@ -1,0 +1,20 @@
+{
+  "name": "ambrook",
+  "version": "0.1.0",
+  "description": "Read your Ambrook books through the hosted Ambrook MCP server at api.ambrook.com: profit and loss, balance sheets, unpaid invoices, bills due, transactions, contacts, bookkeeping tags, reports, attachments, and help articles. Read-only. Sign in with your Ambrook account on first connect.",
+  "author": {
+    "name": "Ambrook",
+    "url": "https://ambrook.com"
+  },
+  "homepage": "https://ambrook.com/mcp-server",
+  "repository": "https://github.com/ambrook/agent-plugins",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ambrook",
+    "ambrook mcp",
+    "ambrook books",
+    "ambrook invoices",
+    "ambrook bills"
+  ],
+  "logo": "assets/ambrook-icon.png"
+}

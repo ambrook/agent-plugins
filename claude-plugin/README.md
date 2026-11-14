@@ -1,32 +1,59 @@
 # Ambrook for Claude
 
-A Claude plugin that connects to the read-only [Ambrook MCP endpoint](https://api.ambrook.com/mcp) and adds the `use-ambrook` skill for month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup.
+Ask Claude about your [Ambrook](https://ambrook.com) books. This plugin connects Claude to the read-only Ambrook MCP server and adds the `use-ambrook` skill, which guides Claude through month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup.
 
-## Contents
-
-| Path                          | Purpose                                                              |
-| ----------------------------- | -------------------------------------------------------------------- |
-| `.claude-plugin/plugin.json`  | Plugin manifest                                                      |
-| `.mcp.json`                   | Remote HTTP MCP server at `https://api.ambrook.com/mcp`              |
-| `skills/use-ambrook/SKILL.md` | How to pick the business and dates, pull reports, and stay read-only |
-
-## Authentication
-
-The server uses OAuth with dynamic client registration and the `external_mcp:read` scope. Claude starts the sign-in flow the first time a tool is used; in Claude Code, run `/mcp` and choose `ambrook` to authenticate. An Ambrook account with MCP access is required.
+> [!NOTE]
+> The Ambrook MCP server is in beta. [Request access](https://ambrook.com/pilot) to turn it on for your account.
 
 ## Install
+
+**Claude Code**
 
 ```
 /plugin marketplace add ambrook/agent-plugins
 /plugin install ambrook@ambrook
 ```
 
-## Example prompts
+Then run `/mcp`, choose `ambrook`, and sign in to Ambrook to approve access.
 
-- Which Ambrook businesses can I access, and which one is my default?
-- Compare my cash-basis profit and loss for the last two complete months.
-- Show my unpaid invoices and the total customers owe me.
-- Show my unpaid bills due in the next 30 days, including overdue bills.
-- Show my 10 most recent transactions missing a category and any suggested categories.
+**claude.ai and the Claude desktop app**
 
-Requests to change data (pay a bill, recategorize transactions, delete invoices) should be declined without calling tools; the connection is read-only.
+Add Ambrook as a custom connector: open **Settings → Connectors**, choose **Add → Add custom connector**, enter `https://api.ambrook.com/mcp`, and connect. See the [full setup guide](https://github.com/ambrook/agent-plugins#claude) for Team and Enterprise plans.
+
+## What's included
+
+| Component                    | What it does                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| MCP server (`.mcp.json`)     | Connects to `https://api.ambrook.com/mcp` over Streamable HTTP                       |
+| Skill (`use-ambrook`)        | Picks the right business and dates, reports full totals, and keeps answers read-only |
+| Manifest (`.claude-plugin/`) | Plugin name, version, and listing details                                            |
+
+The plugin has no hooks, commands, or local scripts.
+
+## Try asking
+
+- "Compare my profit and loss for the last two months and explain the three biggest changes."
+- "How much do customers owe me, and which unpaid invoices are due soonest?"
+- "Which bills are due in the next 30 days, including anything overdue?"
+- "Which recent transactions still need a category, and what does Ambrook suggest?"
+
+## Security and privacy
+
+The connection is read-only: Claude can read your books but can't create or change records, send invoices, pay bills, or move money. You sign in with your own Ambrook account through OAuth and approve the read-only `external_mcp:read` scope, and Claude sees only the businesses your account can access. The plugin stores no credentials.
+
+## Troubleshooting
+
+- **The connection fails or says "not found":** your account may not have the AI connection turned on yet. [Request access](https://ambrook.com/pilot) or contact [Ambrook support](https://support.ambrook.com/en/).
+- **Sign-in gets stuck:** make sure your browser is signed in to the right Ambrook account, then run `/mcp` and connect again.
+
+See the [full troubleshooting guide](https://github.com/ambrook/agent-plugins#troubleshooting).
+
+## Support
+
+- [Documentation](https://ambrook.com/mcp-server)
+- [Help center](https://support.ambrook.com/en/) · [support@ambrook.com](mailto:support@ambrook.com)
+- [Privacy Policy](https://ambrook.com/privacy) · [Terms of Service](https://ambrook.com/terms)
+
+## License
+
+[Apache License 2.0](https://github.com/ambrook/agent-plugins/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.
