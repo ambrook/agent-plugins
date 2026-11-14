@@ -1,0 +1,11 @@
+{
+  "name": "ambrook",
+  "version": "0.1.0",
+  "description": "Read Ambrook records and financial reports: transactions, unpaid invoices, bills due, profit and loss, balance sheets, contacts, tags, attachments, and help articles. Read-only.",
+  "author": {
+    "name": "Ambrook",
+    "url": "https://ambrook.com"
+  },
+  "homepage": "https://ambrook.com/overview/ai",
+  "keywords": ["ambrook", "accounting", "bookkeeping", "finance", "invoices", "bills"]
+}
