@@ -7,8 +7,12 @@
     "url": "https://ambrook.com"
   },
   "homepage": "https://ambrook.com/overview/ai",
+  "documentationUrl": "https://support.ambrook.com/en/articles/18230234-ambrook-mcp-beta",
+  "repository": "https://github.com/ambrook/agent-plugins",
+  "supportUrl": "https://support.ambrook.com/en/",
   "license": "Apache-2.0",
   "privacyPolicyUrl": "https://ambrook.com/privacy",
+  "termsOfServiceUrl": "https://ambrook.com/terms",
   "keywords": [
     "ambrook",
     "accounting",
