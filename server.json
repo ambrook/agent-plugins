@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.ambrook/mcp",
+  "title": "Ambrook",
+  "description": "Read Ambrook books: P&L, balance sheets, unpaid invoices, bills due, and transactions. Read-only.",
+  "version": "1.0.2",
+  "websiteUrl": "https://ambrook.com/mcp-server",
+  "repository": {
+    "url": "https://github.com/ambrook/ambrook-plugin",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://ambrook.com/img/favicon/favicon-196x196.png",
+      "mimeType": "image/png",
+      "sizes": ["196x196"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.ambrook.com/mcp"
+    }
+  ]
+}
