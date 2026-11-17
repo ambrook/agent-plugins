@@ -2,7 +2,7 @@
 
 # Ambrook for AI assistants
 
-Bring your [Ambrook](https://ambrook.com) books into the AI assistant you already use. The Ambrook MCP server lets Antigravity, ChatGPT, Claude, Cursor, Grok, Perplexity, and other [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) clients answer questions about your business from your live books: profit and loss, balance sheets, unpaid invoices, upcoming bills, transactions, and more.
+Bring your [Ambrook](https://ambrook.com) books into the AI assistant you already use. The Ambrook MCP server lets Antigravity, ChatGPT, Claude, Cursor, Grok, Perplexity, Base44, and other [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) clients answer questions about your business from your live books: profit and loss, balance sheets, unpaid invoices, upcoming bills, transactions, and more.
 
 This repository contains Ambrook's official plugins for Antigravity, Claude, ChatGPT, Cursor, and Grok, and the instructions for connecting any other MCP client.
 
@@ -38,6 +38,7 @@ When you connect, you sign in to Ambrook and approve access. Nothing is shared u
 | [Perplexity](#perplexity)                                 | Custom connector on perplexity.ai and the Mac app                               |
 | [Antigravity](#antigravity)                               | Install the plugin with the Antigravity CLI                                     |
 | [Replit](#replit)                                         | Add a custom MCP server under Settings → Integrations                           |
+| [Base44](#base44)                                         | Custom MCP connection in Base44 account settings (Builder plan or higher)       |
 | [Other MCP clients](#other-ai-assistants-and-mcp-clients) | VS Code, Windsurf, Codex, Gemini CLI, and any client that supports remote MCP   |
 
 ### Claude
@@ -126,6 +127,18 @@ The first time the `ambrook` MCP server connects, sign in to Ambrook and approve
 4. Choose **Test & save**, then sign in to Ambrook and approve access.
 
 Ambrook then appears under **MCP Servers**, and Replit Agent can use it in any of your projects. If you don't see the custom MCP options, ask your Replit workspace administrator.
+
+### Base44
+
+Requires a Base44 Builder plan or higher.
+
+1. Click your workspace name at the bottom left, then choose **Account settings**.
+2. Choose **Builder** and scroll to **MCP Connections**.
+3. Choose **Add custom MCP** (or **Add MCP** if you already have a server connected).
+4. Enter the name `Ambrook` and the URL `https://api.ambrook.com/mcp`, and choose **OAuth** for authentication. Leave **Custom headers** empty.
+5. Choose **Authorize & Add**, then sign in to Ambrook and approve access.
+
+Base44 uses Ambrook only in the editor chat while you build, and only when your prompt calls for it, so mention Ambrook by name. Apps you publish can't call Ambrook at runtime, and data the chat pulls in is written into your app when you build it and doesn't refresh afterward. Each Base44 collaborator connects their own Ambrook account. See [Base44's custom MCP guide](https://docs.base44.com/documentation/account-and-billing/setting-up-a-custom-mcp) for details.
 
 ### Other AI assistants and MCP clients
 
