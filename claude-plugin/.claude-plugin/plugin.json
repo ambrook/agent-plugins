@@ -1,6 +1,6 @@
 {
   "name": "ambrook",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Read Ambrook records and financial reports: transactions, unpaid invoices, bills due, profit and loss, balance sheets, contacts, tags, attachments, and help articles. Read-only.",
   "author": {
     "name": "Ambrook",
