@@ -2,7 +2,7 @@
 
 # Ambrook for AI assistants
 
-Bring your [Ambrook](https://ambrook.com) books into the AI assistant you already use. The Ambrook MCP server lets Antigravity, ChatGPT, Claude, Cursor, Grok, and other [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) clients answer questions about your business from your live books: profit and loss, balance sheets, unpaid invoices, upcoming bills, transactions, and more.
+Bring your [Ambrook](https://ambrook.com) books into the AI assistant you already use. The Ambrook MCP server lets Antigravity, ChatGPT, Claude, Cursor, Grok, Perplexity, and other [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) clients answer questions about your business from your live books: profit and loss, balance sheets, unpaid invoices, upcoming bills, transactions, and more.
 
 This repository contains Ambrook's official plugins for Antigravity, Claude, ChatGPT, Cursor, and Grok, and the instructions for connecting any other MCP client.
 
@@ -35,6 +35,7 @@ When you connect, you sign in to Ambrook and approve access. Nothing is shared u
 | [ChatGPT](#chatgpt)                                       | Developer mode app on chatgpt.com (paid plans)                                  |
 | [Cursor](#cursor)                                         | Install the plugin from the Cursor Marketplace                                  |
 | [Grok](#grok)                                             | Ask Grok Bot to add the server, or install the plugin in Grok Build             |
+| [Perplexity](#perplexity)                                 | Custom connector on perplexity.ai and the Mac app                               |
 | [Antigravity](#antigravity)                               | Install the plugin with the Antigravity CLI                                     |
 | [Replit](#replit)                                         | Add a custom MCP server under Settings → Integrations                           |
 | [Other MCP clients](#other-ai-assistants-and-mcp-clients) | VS Code, Windsurf, Codex, Gemini CLI, and any client that supports remote MCP   |
@@ -95,6 +96,16 @@ Grok Bot adds MCP servers only through chat; the connectors screen on grok.com d
 **Grok Build**
 
 Install the [Grok plugin](grok-plugin/), which adds the server and the same bookkeeping skill.
+
+### Perplexity
+
+1. Open **Plugins** in the sidebar.
+2. Choose **Add custom → Add MCP connector**, then choose **Remote**.
+3. Enter the name `Ambrook` and the URL `https://api.ambrook.com/mcp`. Under **Advanced**, choose **OAuth** for authentication and **Streamable HTTP** for transport.
+4. Check the acknowledgement box and choose **Add**.
+5. Choose the **Ambrook** card, then sign in to Ambrook and approve access.
+
+In an organization, an administrator adds the connector under **Organization settings → Connectors** and turns it on for members, or turns on **Allow members to add custom connectors**. See Perplexity's guide to [custom remote connectors](https://www.perplexity.ai/help-center/en/articles/13915507-adding-custom-remote-connectors) and [MCP in Perplexity](https://www.perplexity.ai/help-center/en/articles/11502712-local-and-remote-mcps-for-perplexity).
 
 ### Antigravity
 
