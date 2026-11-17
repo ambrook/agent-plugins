@@ -10,7 +10,7 @@ Ask Claude about your [Ambrook](https://ambrook.com) books. This plugin connects
 **Claude Code**
 
 ```
-/plugin marketplace add ambrook/agent-plugins
+/plugin marketplace add ambrook/ambrook-plugin
 /plugin install ambrook@ambrook
 ```
 
@@ -18,7 +18,7 @@ Then run `/mcp`, choose `ambrook`, and sign in to Ambrook to approve access.
 
 **claude.ai and the Claude desktop app**
 
-Add Ambrook as a custom connector: open **Settings → Connectors**, choose **Add → Add custom connector**, enter `https://api.ambrook.com/mcp`, and connect. See the [full setup guide](https://github.com/ambrook/agent-plugins#claude) for Team and Enterprise plans.
+Add Ambrook as a custom connector: open **Settings → Connectors**, choose **Add → Add custom connector**, enter `https://api.ambrook.com/mcp`, and connect. See the [full setup guide](https://github.com/ambrook/ambrook-plugin#claude) for Team and Enterprise plans.
 
 ## What's included
 
@@ -46,7 +46,7 @@ The connection is read-only: Claude can read your books but can't create or chan
 - **The connection fails or says "not found":** your account may not have the AI connection turned on yet. [Request access](https://ambrook.com/pilot) or contact [Ambrook support](https://support.ambrook.com/en/).
 - **Sign-in gets stuck:** make sure your browser is signed in to the right Ambrook account, then run `/mcp` and connect again.
 
-See the [full troubleshooting guide](https://github.com/ambrook/agent-plugins#troubleshooting).
+See the [full troubleshooting guide](https://github.com/ambrook/ambrook-plugin#troubleshooting).
 
 ## Support
 
@@ -56,4 +56,4 @@ See the [full troubleshooting guide](https://github.com/ambrook/agent-plugins#tr
 
 ## License
 
-[Apache License 2.0](https://github.com/ambrook/agent-plugins/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.
+[Apache License 2.0](https://github.com/ambrook/ambrook-plugin/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.

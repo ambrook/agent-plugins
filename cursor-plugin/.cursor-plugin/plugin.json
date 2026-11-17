@@ -1,0 +1,22 @@
+{
+  "name": "ambrook",
+  "displayName": "Ambrook",
+  "version": "0.1.1",
+  "description": "Read Ambrook records and financial reports: transactions, unpaid invoices, bills due, profit and loss, balance sheets, contacts, tags, attachments, and help articles. Read-only.",
+  "author": {
+    "name": "Ambrook",
+    "email": "support@ambrook.com"
+  },
+  "homepage": "https://ambrook.com/mcp-server",
+  "repository": "https://github.com/ambrook/ambrook-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ambrook",
+    "accounting",
+    "bookkeeping",
+    "finance",
+    "invoices",
+    "bills"
+  ],
+  "logo": "assets/ambrook-icon.png"
+}

@@ -35,8 +35,8 @@ Start a new chat to use Ambrook.
 
 The connection is read-only: ChatGPT can read your books but can't create or change records, send invoices, pay bills, or move money. You sign in with your own Ambrook account and approve access, and ChatGPT sees only the businesses your account can access.
 
-See the [full setup and troubleshooting guide](https://github.com/ambrook/agent-plugins), the [Privacy Policy](https://ambrook.com/privacy), and the [Terms of Service](https://ambrook.com/terms).
+See the [full setup and troubleshooting guide](https://github.com/ambrook/ambrook-plugin), the [Privacy Policy](https://ambrook.com/privacy), and the [Terms of Service](https://ambrook.com/terms).
 
 ## License
 
-[Apache License 2.0](https://github.com/ambrook/agent-plugins/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.
+[Apache License 2.0](https://github.com/ambrook/ambrook-plugin/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.

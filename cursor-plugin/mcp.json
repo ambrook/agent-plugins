@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "ambrook": {
+      "url": "https://api.ambrook.com/mcp"
+    }
+  }
+}

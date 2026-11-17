@@ -1,6 +1,6 @@
 ---
 name: use-ambrook
-description: Use when someone asks to review their Ambrook books, including month-end briefings, profit and loss, unpaid customer invoices, bills due, or transactions missing a category.
+description: Use when someone asks to review their Ambrook books or export financial statements, including month-end briefings, profit and loss, balance sheets, unpaid customer invoices, bills due, or transactions missing a category.
 ---
 
 # Review your Ambrook books
@@ -20,6 +20,13 @@ Use the Ambrook connection to answer questions about the user's books. Fetch onl
 - **Bookkeeping cleanup:** Use `list_transactions` to find recent transactions missing a category. When suggestions are requested, fetch details with `get_transaction` as needed. Describe returned suggestions as unapplied, and say when no suggestion is available.
 
 Give the business, dates, and accounting basis where relevant. Convert cents to dollars and use `get_app_links` for individual records you cite; pass only IDs from Ambrook and omit links that the tool reports as invalid. Distinguish an empty result from a failed or partial lookup. Keep the answer short and state what you couldn't verify.
+
+## Export financial statements
+
+- When `export_financial_report` is available to the connection, use it for balance sheet and profit-and-loss files. Some connections do not advertise this tool yet. If it is unavailable, use an advertised report tool that supports the request or explain what you cannot export; do not invent a tool result.
+- Supply the selected `orgId`, the user's explicit `basis` (`CASH` or `ACCRUAL`), and `period`. Ask for the basis or date scope when missing. For `report=balance_sheet`, supply only `period.end`, the inclusive as-of date. For `report=profit_loss`, supply inclusive `period.start` and `period.end`, or `period={allTime:true}` only when the user explicitly requests all time. Resolve relative dates using the business's local date from `whoami`.
+- Use `detail=summary` unless detailed rows are requested. Supported formats are `Csv` (default), `Excel`, `Html`, and `Pdf`. Use `linkedEntityId` or P&L tag filters (`enterpriseId`, `fundingProgramId`, `locationId`, `projectId`) only with IDs returned for the selected business. Leave unrecorded transactions excluded unless requested. Grouping, comparisons, and display customization are unsupported by this tool; do not silently drop them from the request.
+- Present returned CSV/HTML as text and Excel/PDF as files, using the effective parameters and filename. If the result reports `size_limit_exceeded`, share its `downloadUrl` and explain that the user must open it in a browser signed in to Ambrook. The link regenerates the selected format for the selected business. Do not fetch that link through another integration or claim the file was delivered inline.
 
 ## Respect read-only access
 

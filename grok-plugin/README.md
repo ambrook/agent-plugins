@@ -5,7 +5,7 @@ Ask Grok about your [Ambrook](https://ambrook.com) books. This Grok Build plugin
 > [!NOTE]
 > The Ambrook MCP server is in beta. [Request access](https://ambrook.com/pilot) to turn it on for your account.
 
-Using Grok Bot instead? Add Ambrook from a chat; see the [Grok Bot setup steps](https://github.com/ambrook/agent-plugins#grok).
+Using Grok Bot instead? Add Ambrook from a chat; see the [Grok Bot setup steps](https://github.com/ambrook/ambrook-plugin#grok).
 
 ## What's included
 
@@ -35,7 +35,7 @@ The plugin has no hooks, commands, agents, or local scripts.
 - **The connection fails or says "not found":** your account may not have the AI connection turned on yet. [Request access](https://ambrook.com/pilot) or contact [Ambrook support](https://support.ambrook.com/en/).
 - **Sign-in gets stuck:** make sure your browser is signed in to the right Ambrook account, then try connecting again.
 
-See the [full troubleshooting guide](https://github.com/ambrook/agent-plugins#troubleshooting).
+See the [full troubleshooting guide](https://github.com/ambrook/ambrook-plugin#troubleshooting).
 
 ## Support
 
@@ -45,4 +45,4 @@ See the [full troubleshooting guide](https://github.com/ambrook/agent-plugins#tr
 
 ## License
 
-[Apache License 2.0](https://github.com/ambrook/agent-plugins/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.
+[Apache License 2.0](https://github.com/ambrook/ambrook-plugin/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.

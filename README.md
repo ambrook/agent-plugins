@@ -2,9 +2,9 @@
 
 # Ambrook for AI assistants
 
-Bring your [Ambrook](https://ambrook.com) books into the AI assistant you already use. The Ambrook MCP server lets ChatGPT, Claude, Grok, and other [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) clients answer questions about your business from your live books: profit and loss, balance sheets, unpaid invoices, upcoming bills, transactions, and more.
+Bring your [Ambrook](https://ambrook.com) books into the AI assistant you already use. The Ambrook MCP server lets Antigravity, ChatGPT, Claude, Cursor, Grok, and other [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) clients answer questions about your business from your live books: profit and loss, balance sheets, unpaid invoices, upcoming bills, transactions, and more.
 
-This repository contains Ambrook's official plugins for Claude, ChatGPT, and Grok, and the instructions for connecting any other MCP client.
+This repository contains Ambrook's official plugins for Antigravity, Claude, ChatGPT, Cursor, and Grok, and the instructions for connecting any other MCP client.
 
 > [!NOTE]
 > The Ambrook MCP server is in beta. [Request access](https://ambrook.com/pilot) to turn it on for your account.
@@ -29,12 +29,14 @@ https://api.ambrook.com/mcp
 
 When you connect, you sign in to Ambrook and approve access. Nothing is shared until you do.
 
-| Assistant                                                 | How to connect                                                                        |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [Claude](#claude)                                         | Custom connector on claude.ai and the desktop app, or the plugin in Claude Code       |
-| [ChatGPT](#chatgpt)                                       | Developer mode app on chatgpt.com (paid plans)                                        |
-| [Grok](#grok)                                             | Ask Grok Bot to add the server, or install the plugin in Grok Build                   |
-| [Other MCP clients](#other-ai-assistants-and-mcp-clients) | Cursor, VS Code, Windsurf, Codex, Gemini CLI, and any client that supports remote MCP |
+| Assistant                                                 | How to connect                                                                  |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [Claude](#claude)                                         | Custom connector on claude.ai and the desktop app, or the plugin in Claude Code |
+| [ChatGPT](#chatgpt)                                       | Developer mode app on chatgpt.com (paid plans)                                  |
+| [Cursor](#cursor)                                         | Install the plugin from the Cursor Marketplace                                  |
+| [Grok](#grok)                                             | Ask Grok Bot to add the server, or install the plugin in Grok Build             |
+| [Antigravity](#antigravity)                               | Install the plugin with the Antigravity CLI                                     |
+| [Other MCP clients](#other-ai-assistants-and-mcp-clients) | VS Code, Windsurf, Codex, Gemini CLI, and any client that supports remote MCP   |
 
 ### Claude
 
@@ -52,7 +54,7 @@ On Team and Enterprise plans, an Owner adds the connector once under **Organizat
 Install the plugin, which adds the server and a skill for common bookkeeping reviews:
 
 ```
-/plugin marketplace add ambrook/agent-plugins
+/plugin marketplace add ambrook/ambrook-plugin
 /plugin install ambrook@ambrook
 ```
 
@@ -70,6 +72,14 @@ Requires a paid ChatGPT plan (Plus, Pro, Business, Enterprise, or Edu) on chatgp
 
 Start a new chat to use Ambrook. See the [ChatGPT plugin](chatgpt-plugin/) for the packaged app.
 
+### Cursor
+
+1. Open **Customize** in the sidebar, or browse the [Cursor Marketplace](https://cursor.com/marketplace).
+2. Search for **Ambrook** and choose **Install**.
+3. Under **MCP servers**, find `ambrook`, choose **Connect**, then sign in to Ambrook and approve access.
+
+The plugin adds the server and the same bookkeeping skill. See the [Cursor plugin](cursor-plugin/) for details, including how a team admin can import this repository as a team marketplace.
+
 ### Grok
 
 **Grok Bot**
@@ -84,6 +94,17 @@ Grok Bot adds MCP servers only through chat; the connectors screen on grok.com d
 **Grok Build**
 
 Install the [Grok plugin](grok-plugin/), which adds the server and the same bookkeeping skill.
+
+### Antigravity
+
+Clone this repository and install the plugin with the Antigravity CLI:
+
+```
+git clone https://github.com/ambrook/ambrook-plugin.git
+agy plugin install ./ambrook-plugin/antigravity-plugin
+```
+
+The first time the `ambrook` MCP server connects, sign in to Ambrook and approve access. The plugin adds the server and the same bookkeeping skill. See the [Antigravity plugin](antigravity-plugin/) for details.
 
 ### Other AI assistants and MCP clients
 
@@ -137,12 +158,15 @@ See the [Ambrook Privacy Policy](https://ambrook.com/privacy) and [Terms of Serv
 
 ## In this repository
 
-| Path                                 | What it is                                                       |
-| ------------------------------------ | ---------------------------------------------------------------- |
-| [`claude-plugin/`](claude-plugin/)   | Plugin for Claude Code and the Claude plugin directory           |
-| [`chatgpt-plugin/`](chatgpt-plugin/) | App package for ChatGPT                                          |
-| [`grok-plugin/`](grok-plugin/)       | Plugin for Grok Build                                            |
-| `.claude-plugin/marketplace.json`    | Claude Code marketplace, so you can install from this repository |
+| Path                                         | What it is                                                       |
+| -------------------------------------------- | ---------------------------------------------------------------- |
+| [`claude-plugin/`](claude-plugin/)           | Plugin for Claude Code and the Claude plugin directory           |
+| [`chatgpt-plugin/`](chatgpt-plugin/)         | App package for ChatGPT                                          |
+| [`cursor-plugin/`](cursor-plugin/)           | Plugin for the Cursor Marketplace                                |
+| [`grok-plugin/`](grok-plugin/)               | Plugin for Grok Build                                            |
+| [`antigravity-plugin/`](antigravity-plugin/) | Plugin for Antigravity                                           |
+| `.claude-plugin/marketplace.json`            | Claude Code marketplace, so you can install from this repository |
+| `.cursor-plugin/marketplace.json`            | Cursor marketplace, so teams can import this repository          |
 
 Each plugin includes the `use-ambrook` skill, which guides the assistant through month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup.
 

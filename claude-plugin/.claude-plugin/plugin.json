@@ -1,6 +1,6 @@
 {
   "name": "ambrook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read Ambrook records and financial reports: transactions, unpaid invoices, bills due, profit and loss, balance sheets, contacts, tags, attachments, and help articles. Read-only.",
   "author": {
     "name": "Ambrook",
@@ -8,7 +8,7 @@
   },
   "homepage": "https://ambrook.com/overview/ai",
   "documentationUrl": "https://ambrook.com/mcp-server",
-  "repository": "https://github.com/ambrook/agent-plugins",
+  "repository": "https://github.com/ambrook/ambrook-plugin",
   "supportUrl": "https://support.ambrook.com/en/",
   "license": "Apache-2.0",
   "privacyPolicyUrl": "https://ambrook.com/privacy",

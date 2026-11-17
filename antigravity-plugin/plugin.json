@@ -1,0 +1,29 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "ambrook",
+  "displayName": "Ambrook",
+  "version": "0.1.1",
+  "description": "Ask about your Ambrook books: profit and loss, balance sheets, unpaid invoices, bills due, and transactions that need a category. Read-only.",
+  "logo": "assets/ambrook-icon.png",
+  "suggestedPrompts": [
+    "Compare my profit and loss for the last two months and explain the three biggest changes.",
+    "How much do customers owe me, and which unpaid invoices are due soonest?",
+    "Which bills are due in the next 30 days, including anything overdue?"
+  ],
+  "author": {
+    "name": "Ambrook",
+    "email": "support@ambrook.com",
+    "url": "https://ambrook.com"
+  },
+  "homepage": "https://ambrook.com/mcp-server",
+  "repository": "https://github.com/ambrook/ambrook-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ambrook",
+    "accounting",
+    "bookkeeping",
+    "finance",
+    "invoices",
+    "bills"
+  ]
+}

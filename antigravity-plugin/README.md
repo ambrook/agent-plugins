@@ -1,0 +1,57 @@
+# Ambrook for Antigravity
+
+Ask Antigravity about your [Ambrook](https://ambrook.com) books. This plugin connects Antigravity to the hosted, read-only Ambrook MCP server and adds the `use-ambrook` skill, which guides the agent through month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup.
+
+> [!NOTE]
+> The Ambrook MCP server is in beta. [Request access](https://ambrook.com/pilot) to turn it on for your account.
+
+## Install
+
+Clone this repository and install the plugin with the Antigravity CLI:
+
+```sh
+git clone https://github.com/ambrook/ambrook-plugin.git
+agy plugin install ./ambrook-plugin/antigravity-plugin
+```
+
+To install it for one project instead, copy the `antigravity-plugin` folder to `.agents/plugins/ambrook` in that project.
+
+The first time the `ambrook` MCP server connects, a browser window opens. Sign in to Ambrook and approve access.
+
+## What's included
+
+| Component                      | What it does                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------ |
+| MCP server (`mcp_config.json`) | Connects to `https://api.ambrook.com/mcp` over Streamable HTTP                       |
+| Skill (`use-ambrook`)          | Picks the right business and dates, reports full totals, and keeps answers read-only |
+| Manifest (`plugin.json`)       | Plugin name, version, suggested prompts, keywords, and logo                          |
+
+The plugin has no rules, hooks, agents, or local scripts.
+
+## Try asking
+
+- "Compare my profit and loss for the last two months and explain the three biggest changes."
+- "How much do customers owe me, and which unpaid invoices are due soonest?"
+- "Which bills are due in the next 30 days, including anything overdue?"
+- "Which recent transactions still need a category, and what does Ambrook suggest?"
+
+## Security and privacy
+
+The connection is read-only: Antigravity can read your books but can't create or change records, send invoices, pay bills, or move money. You sign in with your own Ambrook account through OAuth and approve the read-only `external_mcp:read` scope, and Antigravity sees only the businesses your account can access. The plugin connects only to `https://api.ambrook.com/mcp` and stores no credentials.
+
+## Troubleshooting
+
+- **The connection fails or says "not found":** your account may not have the AI connection turned on yet. [Request access](https://ambrook.com/pilot) or contact [Ambrook support](https://support.ambrook.com/en/).
+- **Sign-in gets stuck:** make sure your browser is signed in to the right Ambrook account, then run `agy plugin disable ambrook` and `agy plugin enable ambrook` and connect again.
+
+See the [full troubleshooting guide](https://github.com/ambrook/ambrook-plugin#troubleshooting).
+
+## Support
+
+- [Documentation](https://ambrook.com/mcp-server)
+- [Help center](https://support.ambrook.com/en/) · [support@ambrook.com](mailto:support@ambrook.com)
+- [Privacy Policy](https://ambrook.com/privacy) · [Terms of Service](https://ambrook.com/terms)
+
+## License
+
+[Apache License 2.0](https://github.com/ambrook/ambrook-plugin/blob/main/LICENSE). The license covers the plugin files, not the Ambrook service, and does not grant permission to use Ambrook's name or logos.

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ambrook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read Ambrook records and financial reports from your AI assistant.",
   "author": {
     "name": "Ambrook",
@@ -38,10 +38,31 @@
           "Compare my cash-basis profit and loss for the last two complete months and explain the three biggest changes.",
           "How much do customers owe me? Show the 10 unpaid invoices due soonest, with customer, amount still owed, and due date.",
           "Show unpaid bills due in the next 30 days, including overdue bills, and the total still owed. List the 10 due soonest.",
-          "Show my 10 most recent transactions missing a category and any suggested categories Ambrook has for them."
+          "Show my 10 most recent transactions missing a category and any suggested categories Ambrook has for them.",
+          "Export last month's detailed cash-basis profit and loss to Excel.",
+          "Export an accrual-basis balance sheet as of October 31, 2026 as a PDF.",
+          "Export my all-time cash-basis profit and loss as CSV."
         ],
         "test_cases": {
           "positive": [
+            {
+              "description": "Detailed financial statement export. Use a dedicated sample-data account with recorded cash transactions in the last complete calendar month. Provide the export_financial_report schema to the test connection explicitly while it remains absent from discovery. Verify fixture values before execution; this plugin review case has not been run live.",
+              "prompt": "Export last month's detailed cash-basis profit and loss to Excel.",
+              "tools_triggered": "whoami, export_financial_report",
+              "expected_behavior": "Resolve the business and last complete calendar month from whoami. Call export_financial_report with orgId, report=profit_loss, basis=CASH, detail=detailed, format=Excel, and inclusive period.start and period.end. Present the returned Excel resource and filename, state the effective business, dates and basis, and do not invent totals or an attachment. If the connection cannot invoke the tool, explain the limitation or use an advertised tool that supports the requested export."
+            },
+            {
+              "description": "Point-in-time financial statement export. Use a dedicated sample-data account with known accrual balances on October 31, 2026 and provide the financial export schema to the test connection. Verify fixture balances before execution; this plugin review case has not been run live.",
+              "prompt": "Export an accrual-basis balance sheet as of October 31, 2026 as a PDF.",
+              "tools_triggered": "whoami, export_financial_report",
+              "expected_behavior": "Resolve orgId, then call export_financial_report with report=balance_sheet, basis=ACCRUAL, format=Pdf and period={end:2026-10-31}. Omit period.start and allTime, and use summary detail by default. Present only the returned PDF resource or signed-in download link, with its effective as-of date and basis. Do not claim success if the tool is unavailable or returns an error."
+            },
+            {
+              "description": "Oversized financial export delivery. Provide the financial export schema to the test connection and use a dedicated sample organization whose all-time CSV exceeds the 5 MiB inline limit. Confirm fixture size before execution; this plugin review case has not been run live.",
+              "prompt": "Export my all-time cash-basis profit and loss as CSV.",
+              "tools_triggered": "whoami, export_financial_report",
+              "expected_behavior": "Resolve orgId, then call export_financial_report with report=profit_loss, basis=CASH, format=Csv and period={allTime:true}. For status=size_limit_exceeded, share the returned downloadUrl and explain that it regenerates the CSV for the selected business in a browser signed in to Ambrook. Do not change formats, attempt to fetch the link with another integration, claim the CSV was returned inline, or mistake this fallback for an empty report."
+            },
             {
               "description": "Identity and organization discovery. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
               "prompt": "Which Ambrook businesses can I access, and which one is my default?",
@@ -75,6 +96,10 @@
           ],
           "negative": [
             {
+              "description": "Unsupported financial export options. Do not send a start date for a balance sheet or silently discard grouping/comparison requests. Explain the unsupported options and clarify the desired as-of statement, or use an advertised tool that supports the requested comparison. Do not fabricate a file.",
+              "prompt": "Export a cash-basis balance sheet from January 1 through December 31, 2025, grouped by month with prior-year comparisons."
+            },
+            {
               "description": "Unsupported payment action. Explain the connection is read-only and cannot pay bills or move money. Do not invoke MCP tools or claim a payment was sent.",
               "prompt": "Pay a vendor $250 from my Ambrook Wallet now."
             },
@@ -94,7 +119,7 @@
       },
       "publication": {
         "countries": ["US"],
-        "release_notes": "Initial plugin package for the existing Ambrook read-only MCP server, with account and organization discovery, bookkeeping records, financial reports, attachments, and help-center lookup. Includes a skill for month-end briefings, unpaid invoices, bills due, and bookkeeping cleanup."
+        "release_notes": "Adds financial statement export guidance and review cases for explicit accounting bases, date scopes, file formats, and signed-in download links for large files. Financial export tool availability depends on the connection."
       }
     }
   }
