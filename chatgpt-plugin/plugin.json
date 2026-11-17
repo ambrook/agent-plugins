@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ambrook",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Read Ambrook records and financial reports from your AI assistant.",
   "author": {
     "name": "Ambrook",
@@ -36,6 +36,7 @@
         "prompts": [
           "Which Ambrook businesses can I access, and which one is my default?",
           "Compare my cash-basis profit and loss for the last two complete months and explain the three biggest changes.",
+          "Show my cash-basis balance sheet as of the last day of last month.",
           "How much do customers owe me? Show the 10 unpaid invoices due soonest, with customer, amount still owed, and due date.",
           "Show unpaid bills due in the next 30 days, including overdue bills, and the total still owed. List the 10 due soonest.",
           "Show my 10 most recent transactions missing a category and any suggested categories Ambrook has for them.",
@@ -73,7 +74,13 @@
               "description": "Two-month financial comparison using authoritative statement totals rather than transaction sums. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",
               "prompt": "Compare my cash-basis profit and loss for the last two complete months and explain the three biggest changes.",
               "tools_triggered": "whoami, query_profit_and_loss",
-              "expected_behavior": "Resolve calendar months using the selected organization timezone and todaysDate from whoami. Call query_profit_and_loss with its orgId, basis=CASH, groupBy=Month, start at the first day of the earlier month and end at the final day of the later month. Use returned row/column relationships and cents values to calculate changes, format dollars correctly, and state dates and basis. Report only supported changes; explain missing data without inventing totals."
+              "expected_behavior": "Resolve calendar months using the selected organization timezone and todaysDate from whoami. Call query_profit_and_loss with its orgId, basis=CASH, groupBy=Month, start at the first day of the earlier month and end at the final day of the later month. Use returned row/column relationships and cents values to calculate changes, format dollars correctly, and state dates and basis. Column meta.startDate is inclusive; meta.endDateExclusive is exclusive, so subtract one calendar day from a non-null endDateExclusive to display the column's through-date. Report only supported changes; explain missing data without inventing totals."
+            },
+            {
+              "description": "Balance-sheet as-of date and exclusive column metadata. Use the selected Ambrook sample-data organization and confirm its balances through the last day of the previous month in Ambrook before execution.",
+              "prompt": "Show my cash-basis balance sheet as of the last day of last month.",
+              "tools_triggered": "whoami, query_balance_sheet",
+              "expected_behavior": "Resolve the previous month's last day using the selected organization timezone and todaysDate from whoami. Call query_balance_sheet with its orgId, basis=CASH, and that inclusive end date. Read endBalance values for the as-of balances. When present, meta.endDateExclusive is the following day; display the requested as-of date rather than the exclusive bound. State the dates and basis and explain missing data without inventing balances."
             },
             {
               "description": "Accounts receivable with exact filtered totals and a bounded oldest-due page. Use a dedicated Ambrook sample-data account with external MCP enabled and one accessible default organization. If multiple organizations are returned, select the sample organization before continuing. Seed recorded transactions in the last two complete calendar months, unpaid invoices with different due dates, unpaid bills both overdue and due within the next 30 days, and at least one transaction missing a category. Confirm fixture values in Ambrook before execution; no fixture data has been created or verified yet.",

@@ -11,6 +11,7 @@ Use the Ambrook connection to answer questions about the user's books. Fetch onl
 
 - Call `whoami` when you need to identify the business or resolve relative dates. If the user names an accessible business, use its returned ID. If there is exactly one accessible business, use it. If several are accessible and the request is ambiguous, ask which one to use before pulling records; you can mention the returned default. If none are accessible, say so and stop.
 - Use the selected business's local date from `whoami` to resolve relative periods. Keep Ambrook's calendar dates as returned. If the connection fails, explain what you couldn't retrieve and suggest reconnecting or opening Ambrook.
+- For `query_profit_and_loss` and `query_balance_sheet`, input `start` and `end` dates are inclusive. Each column's `meta.startDate` is inclusive and `meta.endDateExclusive` is exclusive. When present, subtract one calendar day from `meta.endDateExclusive` to display the column's inclusive through-date. A column through December 31 has an exclusive bound of January 1.
 
 ## Pull and explain the results
 
