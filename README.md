@@ -36,6 +36,7 @@ When you connect, you sign in to Ambrook and approve access. Nothing is shared u
 | [Cursor](#cursor)                                         | Install the plugin from the Cursor Marketplace                                  |
 | [Grok](#grok)                                             | Ask Grok Bot to add the server, or install the plugin in Grok Build             |
 | [Antigravity](#antigravity)                               | Install the plugin with the Antigravity CLI                                     |
+| [Replit](#replit)                                         | Add a custom MCP server under Settings → Integrations                           |
 | [Other MCP clients](#other-ai-assistants-and-mcp-clients) | VS Code, Windsurf, Codex, Gemini CLI, and any client that supports remote MCP   |
 
 ### Claude
@@ -105,6 +106,15 @@ agy plugin install ./ambrook-plugin/antigravity-plugin
 ```
 
 The first time the `ambrook` MCP server connects, sign in to Ambrook and approve access. The plugin adds the server and the same bookkeeping skill. See the [Antigravity plugin](antigravity-plugin/) for details.
+
+### Replit
+
+1. Open **Settings → Integrations → Your integrations**.
+2. Choose **Add custom → Add personal MCP server**. To share Ambrook with your whole workspace, choose **Add workspace MCP server** instead. This needs permission to manage workspace integrations.
+3. Enter `Ambrook` as the **Display name** and `https://api.ambrook.com/mcp` as the **MCP Server URL**. Leave **Advanced settings** empty.
+4. Choose **Test & save**, then sign in to Ambrook and approve access.
+
+Ambrook then appears under **MCP Servers**, and Replit Agent can use it in any of your projects. If you don't see the custom MCP options, ask your Replit workspace administrator.
 
 ### Other AI assistants and MCP clients
 
