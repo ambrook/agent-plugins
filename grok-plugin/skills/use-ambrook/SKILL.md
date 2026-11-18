@@ -1,6 +1,6 @@
 ---
 name: use-ambrook
-description: Use when someone asks to review their Ambrook books or export financial statements, including month-end briefings, profit and loss, balance sheets, unpaid customer invoices, bills due, or transactions missing a category.
+description: Use when someone asks to review their Ambrook books, export records or financial statements, or download import templates. Reviews include month-end briefings, profit and loss, balance sheets, unpaid customer invoices, bills due, and transactions missing a category.
 ---
 
 # Review your Ambrook books
@@ -21,6 +21,12 @@ Use the Ambrook connection to answer questions about the user's books. Fetch onl
 - **Bookkeeping cleanup:** Use `list_transactions` to find recent transactions missing a category. When suggestions are requested, fetch details with `get_transaction` as needed. Describe returned suggestions as unapplied, and say when no suggestion is available.
 
 Give the business, dates, and accounting basis where relevant. Convert cents to dollars and use `get_app_links` for individual records you cite; pass only IDs from Ambrook and omit links that the tool reports as invalid. Distinguish an empty result from a failed or partial lookup. Keep the answer short and state what you couldn't verify.
+
+## Export records and get import templates
+
+- When available, use `export_data` with the selected `orgId` and `report` for record files. Table exports support `Csv` (default) and `Excel`. Receipt exports use `Zip`. For invoice or bill exports with one row per line item, use `breakdown=LineItems`. Use the list tools for individual record lookups.
+- When available, use `get_import_template` with the selected `orgId` and the requested `template`. The tool defaults to `Csv` and supports `Excel`. Choose `invoices` or `bills` for the corresponding headers.
+- Share the returned file or CSV with its filename. For `size_limit_exceeded`, share the returned `downloadUrl` and ask the user to open it in a browser signed in to Ambrook.
 
 ## Export financial statements
 
