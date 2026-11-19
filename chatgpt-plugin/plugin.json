@@ -127,6 +127,20 @@
           ],
           "negative": [
             {
+              "description": "Restricted report download. Explain that Wallet statements are available directly in Ambrook and direct the user there. Do not fetch the document through a tool or suggest reconnecting.",
+              "prompt": "Download my Ambrook Wallet statement for last month."
+            },
+            {
+              "description": "Restricted report download. Explain that vendor 1099 payment reports are available directly in Ambrook and direct the user there. Do not fetch the report through a tool or suggest reconnecting.",
+              "prompt": "Export my vendor 1099 payment report as Excel."
+            },
+            {
+              "description": "Explain which files linked to a transaction are available through the Ambrook MCP and where to open restricted documents.",
+              "prompt": "Which files are linked to this transaction, and can you download them for me?",
+              "tools_triggered": "get_transaction, get_attachment",
+              "expected_behavior": "Use the transaction details to identify linked files and download eligible files. Wallet EIN letters, contact tax documents, and contact import files may appear on a transaction, but are unavailable through the Ambrook MCP. Direct the user to Ambrook for those files. If the transaction is unclear, ask which one the user means."
+            },
+            {
               "description": "Unsupported financial export options. Do not send a start date for a balance sheet or silently discard grouping/comparison requests. Explain the unsupported options and clarify the desired as-of statement, or use an advertised tool that supports the requested comparison. Do not fabricate a file.",
               "prompt": "Export a cash-basis balance sheet from January 1 through December 31, 2025, grouped by month with prior-year comparisons."
             },
